@@ -8,5 +8,6 @@ dependencyResolutionManagement {
 rootProject.name = "DiningFinder"
 include(
     ":app",
-    ":depconstraints"
+    ":depconstraints",
+    ":shared"
 )

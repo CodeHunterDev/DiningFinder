@@ -72,6 +72,13 @@ val timber = "4.7.1"
 val viewpager2 = "1.0.0"
 val viewModelCompose = "1.0.0-alpha02"
 val uiAutomator = "2.2.0"
+val retrofit = "2.9.0"
+val moshi = "1.11.0"
+val kotchi = "2.3.3"
+val faker = "1.0.2"
+val binder = "1.0.0-alpha01"
+val turbine = "0.5.2"
+val assertJVersion = "3.19.0"
 
 dependencies {
     constraints {
@@ -112,6 +119,18 @@ dependencies {
         api("${Libs.RULES}:$rules")
         api("${Libs.RUNNER}:$runner")
         api("${Libs.TIMBER}:$timber")
+        api("${Libs.OKHTTP_MOCK_SERVER}:$okhttp")
+        api("${Libs.RETROFIT}:$retrofit")
+        api("${Libs.MOSHI}:$moshi")
+        api("${Libs.MOSHI_RETROFIT}:$retrofit")
+        api("${Libs.MOSHI_KOTLIN}:$moshi")
+        api("${Libs.KOTCHI}:$kotchi")
+        api("${Libs.KOTCHI_COMPILER}:$kotchi")
+        api("${Libs.FAKER}:$faker")
+        api("${Libs.HILT_BINDER}:$binder")
+        api("${Libs.HILT_BINDER_COMPILER}:$binder")
+        api("${Libs.TURBINE}:$turbine")
+        api("${Libs.ASSERT_J}:$assertJVersion")
     }
 }
 
