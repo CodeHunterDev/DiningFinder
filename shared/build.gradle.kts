@@ -19,6 +19,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
+    id("com.google.secrets_gradle_plugin") version "0.6.1"
 }
 
 android {
