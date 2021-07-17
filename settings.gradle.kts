@@ -9,5 +9,6 @@ rootProject.name = "DiningFinder"
 include(
     ":app",
     ":depconstraints",
-    ":shared"
+    ":shared",
+    ":model"
 )

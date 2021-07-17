@@ -1,4 +1,3 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 buildscript {
@@ -12,10 +11,6 @@ buildscript {
         classpath("com.google.dagger:hilt-android-gradle-plugin:${Versions.HILT_AGP}")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.NAVIGATION}")
         classpath("com.google.gms:google-services:${Versions.GOOGLE_SERVICES}")
-
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle.kts files
     }
 }
 
@@ -42,13 +37,6 @@ subprojects {
         }
     }
 
-    // `spotlessCheck` runs when a build includes `check`, notably during presubmit. In these cases
-    // we prefer `spotlessCheck` run as early as possible since it fails in seconds. This prevents a
-    // build from running for several minutes doing other intensive tasks (resource processing, code
-    // generation, compilation, etc) only to fail on a formatting nit.
-    // Using `mustRunAfter` avoids creating a task dependency. The order is enforced only if
-    // `spotlessCheck` is already scheduled to run, so we can still build and launch from the IDE
-    // while the code is "dirty".
     tasks.whenTaskAdded {
         if (name == "preBuild") {
             mustRunAfter("spotlessCheck")

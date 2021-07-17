@@ -94,6 +94,7 @@ dependencies {
     api(platform(project(":depconstraints")))
     kapt(platform(project(":depconstraints")))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    api(project(":model"))
 
     // Architecture Components
     testImplementation(Libs.ARCH_TESTING)
