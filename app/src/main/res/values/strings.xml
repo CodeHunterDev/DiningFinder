@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Dining Finder</string>
+    <string name="resturants">Restaurants</string>
 </resources>

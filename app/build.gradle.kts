@@ -82,6 +82,9 @@ dependencies {
     api(platform(project(":depconstraints")))
     kapt(platform(project(":depconstraints")))
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
+    implementation(project(":shared"))
+    testImplementation(project(":test-shared"))
+    implementation(project(":model"))
 
     implementation(Libs.CORE_KTX)
     // UI
@@ -100,8 +103,8 @@ dependencies {
 
     // Dagger Hilt
     implementation(Libs.HILT_ANDROID)
-    androidTestImplementation(Libs.HILT_TESTING)
     kapt(Libs.HILT_COMPILER)
+    androidTestImplementation(Libs.HILT_TESTING)
     kaptAndroidTest(Libs.HILT_COMPILER)
 
     // Glide
