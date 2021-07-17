@@ -14,27 +14,28 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.data
+package com.elbehiry.shared.data.search.remote
 
 import com.elbehiry.model.SearchItem
-import com.elbehiry.shared.BuildConfig
-import retrofit2.http.GET
-import retrofit2.http.Query
+import com.elbehiry.shared.data.remote.DiningApi
+import javax.inject.Inject
 
-const val foodDefaultCategoryId = "4d4b7105d754a06374d81259"
 const val defaultRadius = 500
 const val defaultLimit = 30
 
-interface DiningApi {
-
-    @GET("v2/venues/search")
-    suspend fun search(
-        @Query("ll") latLng: String,
-        @Query("v") version: String,
-        @Query("client_id") clientId: String = BuildConfig.SECRET_ID,
-        @Query("client_secret") clientSecret: String = BuildConfig.SECRET_ID,
-        @Query("radius") radius: Int = defaultRadius,
-        @Query("limit") limit: Int = defaultLimit,
-        @Query("categoryId") categoryId: String = foodDefaultCategoryId
-    ) : SearchItem
+class SearchRestaurantsDataSource @Inject constructor(
+    private val api: DiningApi
+) : SearchDataSource {
+    override suspend fun search(
+        latLng: String,
+        version: String,
+        radius: Int?,
+        limit: Int?
+    ): SearchItem =
+        api.search(
+            latLng = latLng,
+            version = version,
+            radius = radius ?: defaultRadius,
+            limit = limit ?: defaultLimit
+        )
 }

@@ -17,7 +17,7 @@
 package com.elbehiry.shared.di
 
 import com.elbehiry.shared.BuildConfig
-import com.elbehiry.shared.data.DiningApi
+import com.elbehiry.shared.data.remote.DiningApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
