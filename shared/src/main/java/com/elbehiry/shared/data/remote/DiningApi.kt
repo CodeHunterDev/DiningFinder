@@ -29,7 +29,7 @@ interface DiningApi {
     suspend fun search(
         @Query("ll") latLng: String,
         @Query("v") version: String,
-        @Query("client_id") clientId: String = BuildConfig.SECRET_ID,
+        @Query("client_id") clientId: String = BuildConfig.CLIENT_ID,
         @Query("client_secret") clientSecret: String = BuildConfig.SECRET_ID,
         @Query("radius") radius: Int,
         @Query("limit") limit: Int,

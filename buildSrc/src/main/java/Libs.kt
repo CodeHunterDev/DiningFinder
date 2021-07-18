@@ -8,6 +8,7 @@ object Libs {
     const val CORE_KTX = "androidx.core:core-ktx"
     const val COROUTINES = "org.jetbrains.kotlinx:kotlinx-coroutines-core"
     const val COROUTINES_TEST = "org.jetbrains.kotlinx:kotlinx-coroutines-test"
+    const val COROUTINES_PLAY_SERVICE = "org.jetbrains.kotlinx:kotlinx-coroutines-play-services"
     const val DRAWER_LAYOUT = "androidx.drawerlayout:drawerlayout"
     const val ESPRESSO_CONTRIB = "androidx.test.espresso:espresso-contrib"
     const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core"
@@ -48,4 +49,8 @@ object Libs {
     const val HILT_BINDER_COMPILER = "com.paulrybitskyi:hilt-binder-compiler"
     const val TURBINE = "app.cash.turbine:turbine"
     const val ASSERT_J = "org.assertj:assertj-core"
+    const val LIFECYCLE_COMPILER = "androidx.lifecycle:lifecycle-compiler"
+    const val LIFECYCLE_RUNTIME_KTX = "androidx.lifecycle:lifecycle-runtime-ktx"
+    const val LIFECYCLE_VIEW_MODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx"
+    const val PLAY_SERVICE_LOCATION = "com.google.android.gms:play-services-location"
 }
