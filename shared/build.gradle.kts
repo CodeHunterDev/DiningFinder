@@ -71,15 +71,11 @@ android {
     buildTypes {
         val urlName = "FOURSQUARE_BASE_URL"
         val baseUrl = "\"https://api.foursquare.com/\""
-        val keyName = "FOURSQUARE_KEY"
-        val keyValue = "\"PKXC1ER2IHK0NLUOTEZS5GS54VQS54PIUBJFVTMEUDWNPBB0\""
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
-            buildConfigField("String", keyName, keyValue)
         }
         getByName("debug") {
             buildConfigField("String", urlName, baseUrl)
-            buildConfigField("String", keyName, keyValue)
         }
     }
 
@@ -121,10 +117,13 @@ dependencies {
     // Coroutines
     api(Libs.COROUTINES)
     testImplementation(Libs.COROUTINES_TEST)
+    implementation(Libs.COROUTINES_PLAY_SERVICE)
 
     // Dagger Hilt
     implementation(Libs.HILT_ANDROID)
     kapt(Libs.HILT_COMPILER)
+
+    implementation(Libs.PLAY_SERVICE_LOCATION)
 
     // Unit tests
     testImplementation(Libs.JUNIT)
