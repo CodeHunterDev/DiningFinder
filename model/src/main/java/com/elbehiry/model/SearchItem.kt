@@ -38,7 +38,7 @@ data class Location(
     val labeledLatLngs: List<LabeledLatLngsItem?>? = null,
 
     @Json(name = "lng")
-    val lng: Double? = null,
+    val lng: Double,
 
     @Json(name = "distance")
     val distance: Int? = null,
@@ -56,7 +56,7 @@ data class Location(
     val crossStreet: String? = null,
 
     @Json(name = "lat")
-    val lat: Double? = null,
+    val lat: Double,
 
     @Json(name = "neighborhood")
     val neighborhood: String? = null,
@@ -77,7 +77,7 @@ data class VenuesItem(
     val name: String? = null,
 
     @Json(name = "location")
-    val location: Location? = null,
+    val location: Location,
 
     @Json(name = "id")
     val id: String? = null,

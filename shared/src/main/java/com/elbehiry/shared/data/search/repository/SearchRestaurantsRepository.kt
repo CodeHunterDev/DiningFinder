@@ -18,16 +18,25 @@ package com.elbehiry.shared.data.search.repository
 
 import com.elbehiry.model.VenuesItem
 import com.elbehiry.shared.data.search.remote.SearchDataSource
+import com.elbehiry.shared.result.Result
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 class SearchRestaurantsRepository @Inject constructor(
     private val searchDataSource: SearchDataSource
 ) : SearchRepository {
-    override suspend fun search(
+    override fun search(
         latLng: String,
         version: String,
         radius: Int?,
         limit: Int?
-    ): List<VenuesItem> =
-        searchDataSource.search(latLng, version, radius, limit).response?.venues ?: emptyList()
+    ): Flow<Result<List<VenuesItem>>> {
+        return flow {
+            emit(Result.Loading)
+            val items = searchDataSource.search(latLng, version, radius, limit).response?.venues
+                ?: emptyList()
+            emit(Result.Success(items))
+        }
+    }
 }

@@ -14,15 +14,13 @@
  * limitations under the License.
  */
 
-package com.elbehiry.shared.result
+package com.elbehiry.shared.data.location.repository
 
-import com.elbehiry.shared.result.Result.Success
+import com.elbehiry.model.LocationModel
+import kotlinx.coroutines.flow.Flow
+import com.elbehiry.shared.result.Result
 
-sealed class Result<out R> {
-    data class Success<out T>(val data: T) : Result<T>()
-    data class Error(val exception: Exception) : Result<Nothing>()
-    object Loading : Result<Nothing>()
+interface ILocationRepository {
+
+    fun getCurrentLocation(): Flow<Result<LocationModel>>
 }
-
-val <T> Result<T>.data: T?
-    get() = (this as? Success)?.data
