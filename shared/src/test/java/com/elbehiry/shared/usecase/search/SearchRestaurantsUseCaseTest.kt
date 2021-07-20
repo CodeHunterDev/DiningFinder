@@ -18,7 +18,6 @@ package com.elbehiry.shared.usecase.search
 
 import android.accounts.NetworkErrorException
 import app.cash.turbine.test
-import com.elbehiry.model.VenuesItem
 import com.elbehiry.shared.data.search.repository.SearchRepository
 import com.elbehiry.shared.domain.search.SearchRestaurantsUseCase
 import com.elbehiry.shared.result.Result
@@ -29,7 +28,6 @@ import com.elbehiry.test_shared.runBlockingTest
 import com.github.javafaker.Faker
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOf
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert
@@ -38,9 +36,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 @RunWith(MockitoJUnitRunner::class)
 class SearchRestaurantsUseCaseTest {
     @get:Rule
@@ -66,7 +62,7 @@ class SearchRestaurantsUseCaseTest {
             )
 
             searchRestaurantsUseCase(createDummyParams()).test {
-                Assert.assertEquals(expectItem().data,VENUES_ITEMS)
+                Assert.assertEquals(expectItem().data, VENUES_ITEMS)
                 expectComplete()
             }
         }

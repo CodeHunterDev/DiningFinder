@@ -56,7 +56,6 @@ android {
                 "google_maps_key",
                 "AIzaSyCeWgfOFYvG7PYq4tfKUOFw5LTp4-eCBG8"
             )
-
         }
         getByName("debug") {
             versionNameSuffix = "-debug"
@@ -138,10 +137,14 @@ dependencies {
 
     // Local unit tests
     testImplementation(Libs.JUNIT)
-    testImplementation(Libs.MOCKITO_CORE)
-    testImplementation(Libs.MOCKITO_KOTLIN)
     testImplementation(Libs.HAMCREST)
+    testImplementation(Libs.FAKER)
+    testImplementation(Libs.TURBINE)
+    testImplementation(Libs.EXT_JUNIT)
+    testImplementation(Libs.ASSERT_J)
+    testImplementation(Libs.MOCKK)
 
+    // play service
     implementation(Libs.COROUTINES_PLAY_SERVICE)
     implementation(Libs.PLAY_SERVICE_LOCATION)
 

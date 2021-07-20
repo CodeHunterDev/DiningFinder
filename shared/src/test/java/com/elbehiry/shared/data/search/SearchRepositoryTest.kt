@@ -21,7 +21,6 @@ import com.elbehiry.model.SearchItem
 import com.elbehiry.shared.data.search.remote.SearchDataSource
 import com.elbehiry.shared.data.search.repository.SearchRepository
 import com.elbehiry.shared.data.search.repository.SearchRestaurantsRepository
-import com.elbehiry.shared.result.Result
 import com.elbehiry.shared.result.data
 import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.test_shared.SEARCH_ITEM
@@ -30,7 +29,6 @@ import com.elbehiry.test_shared.runBlockingTest
 import com.github.javafaker.Faker
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
-import org.assertj.core.api.Assertions
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
