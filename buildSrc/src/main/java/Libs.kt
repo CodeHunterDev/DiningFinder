@@ -53,4 +53,5 @@ object Libs {
     const val LIFECYCLE_RUNTIME_KTX = "androidx.lifecycle:lifecycle-runtime-ktx"
     const val LIFECYCLE_VIEW_MODEL_KTX = "androidx.lifecycle:lifecycle-viewmodel-ktx"
     const val PLAY_SERVICE_LOCATION = "com.google.android.gms:play-services-location"
+    const val MOCKK = "io.mockk:mockk"
 }

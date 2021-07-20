@@ -134,15 +134,4 @@ dependencies {
     testImplementation(Libs.TURBINE)
     testImplementation(Libs.EXT_JUNIT)
     testImplementation(Libs.ASSERT_J)
-
-    androidTestImplementation(Libs.ARCH_TESTING)
-    androidTestImplementation(Libs.RUNNER)
-    androidTestImplementation(Libs.EXT_JUNIT)
-    androidTestImplementation(Libs.ASSERT_J)
-    androidTestImplementation(Libs.TURBINE)
-    androidTestImplementation(Libs.COROUTINES_TEST)
-    androidTestImplementation(Libs.FAKER)
-
-    // unit tests livedata
-    testImplementation(Libs.ARCH_TESTING)
 }

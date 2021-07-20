@@ -72,6 +72,7 @@ val binder = "1.0.0-alpha01"
 val turbine = "0.5.2"
 val assertJVersion = "3.19.0"
 val playServiceLocation = "18.0.0"
+val mockkVersion = "1.10.6"
 
 dependencies {
     constraints {
@@ -129,6 +130,7 @@ dependencies {
         api("${Libs.LIFECYCLE_RUNTIME_KTX}:$lifecycle")
         api("${Libs.LIFECYCLE_VIEW_MODEL_KTX}:$lifecycle")
         api("${Libs.PLAY_SERVICE_LOCATION}:$playServiceLocation")
+        api("${Libs.MOCKK}:$mockkVersion")
     }
 }
 
