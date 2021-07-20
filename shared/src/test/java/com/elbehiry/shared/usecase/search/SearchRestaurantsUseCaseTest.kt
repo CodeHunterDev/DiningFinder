@@ -17,6 +17,7 @@
 package com.elbehiry.shared.usecase.search
 
 import android.accounts.NetworkErrorException
+import app.cash.turbine.test
 import com.elbehiry.model.VenuesItem
 import com.elbehiry.shared.data.search.repository.SearchRepository
 import com.elbehiry.shared.domain.search.SearchRestaurantsUseCase
@@ -28,6 +29,8 @@ import com.elbehiry.test_shared.runBlockingTest
 import com.github.javafaker.Faker
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flowOf
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Assert
 import org.junit.Rule
@@ -35,7 +38,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 @RunWith(MockitoJUnitRunner::class)
 class SearchRestaurantsUseCaseTest {
     @get:Rule
@@ -53,28 +58,34 @@ class SearchRestaurantsUseCaseTest {
     fun `search for restaurant returns data as Result_Success value`() =
         coroutineRule.runBlockingTest {
             whenever(searchRepository.search(any(), any(), any(), any())).thenReturn(
-                VENUES_ITEMS
+                flowOf(Result.Success(VENUES_ITEMS))
             )
 
             searchRestaurantsUseCase = SearchRestaurantsUseCase(
                 searchRepository, coroutineRule.testDispatcher
             )
 
-            val restaurants = searchRestaurantsUseCase(createDummyParams())
-            assertThat(restaurants is Result.Success)
-            Assert.assertEquals(restaurants.data, VENUES_ITEMS)
+            searchRestaurantsUseCase(createDummyParams()).test {
+                Assert.assertEquals(expectItem().data,VENUES_ITEMS)
+                expectComplete()
+            }
         }
 
     @Test
     fun `search failed for restaurant returns data as Result_Error value`() =
         coroutineRule.runBlockingTest {
-            searchRestaurantsUseCase = SearchRestaurantsUseCase(
-                FakeFailedSearchRepository(), coroutineRule.testDispatcher
+            whenever(searchRepository.search(any(), any(), any(), any())).thenReturn(
+                flowOf(Result.Error(NetworkErrorException("Network Failure")))
             )
 
-            val result = searchRestaurantsUseCase(createDummyParams())
-            assertThat(result is Result.Error)
-            assertThat((result as Result.Error).exception is NetworkErrorException)
+            searchRestaurantsUseCase = SearchRestaurantsUseCase(
+                searchRepository, coroutineRule.testDispatcher
+            )
+
+            searchRestaurantsUseCase(createDummyParams()).test {
+                assertThat((expectItem() as Result.Error).exception is NetworkErrorException)
+                expectComplete()
+            }
         }
 
     private fun createDummyParams() = SearchRestaurantsUseCase.Params.create(
@@ -83,15 +94,4 @@ class SearchRestaurantsUseCaseTest {
         faker.number().digits(2).toInt(),
         faker.number().digits(2).toInt()
     )
-
-    private inner class FakeFailedSearchRepository : SearchRepository {
-        override suspend fun search(
-            latLng: String,
-            version: String,
-            radius: Int?,
-            limit: Int?
-        ): List<VenuesItem> {
-            throw NetworkErrorException("Network Failure")
-        }
-    }
 }

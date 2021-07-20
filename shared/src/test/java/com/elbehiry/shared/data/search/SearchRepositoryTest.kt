@@ -16,10 +16,13 @@
 
 package com.elbehiry.shared.data.search
 
+import app.cash.turbine.test
 import com.elbehiry.model.SearchItem
 import com.elbehiry.shared.data.search.remote.SearchDataSource
 import com.elbehiry.shared.data.search.repository.SearchRepository
 import com.elbehiry.shared.data.search.repository.SearchRestaurantsRepository
+import com.elbehiry.shared.result.Result
+import com.elbehiry.shared.result.data
 import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.test_shared.SEARCH_ITEM
 import com.elbehiry.test_shared.VENUES_ITEMS
@@ -27,6 +30,7 @@ import com.elbehiry.test_shared.runBlockingTest
 import com.github.javafaker.Faker
 import com.nhaarman.mockito_kotlin.any
 import com.nhaarman.mockito_kotlin.whenever
+import org.assertj.core.api.Assertions
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Rule
@@ -34,7 +38,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 @RunWith(MockitoJUnitRunner::class)
 class SearchRepositoryTest {
 
@@ -65,13 +71,15 @@ class SearchRepositoryTest {
                 SEARCH_ITEM
             )
 
-            val items = searchRepository.search(
+            searchRepository.search(
                 "${faker.address().latitude()},${faker.address().longitude()}",
                 faker.number().digits(3).toString(),
                 faker.number().digits(2).toInt(),
                 faker.number().digits(2).toInt()
-            )
-            Assert.assertEquals(items, VENUES_ITEMS)
+            ).test {
+                Assert.assertEquals(expectItem().data, VENUES_ITEMS)
+                expectComplete()
+            }
         }
     }
 
@@ -85,13 +93,15 @@ class SearchRepositoryTest {
             ).thenReturn(
                 SearchItem()
             )
-            val items = searchRepository.search(
+            searchRepository.search(
                 "${faker.address().latitude()},${faker.address().longitude()}",
                 faker.number().digits(3).toString(),
                 faker.number().digits(2).toInt(),
                 faker.number().digits(2).toInt()
-            )
-            Assert.assertTrue(items.isEmpty())
+            ).test {
+                Assert.assertTrue((expectItem().data!!.isEmpty()))
+                expectComplete()
+            }
         }
     }
 }
