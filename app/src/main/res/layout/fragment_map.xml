@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.elbehiry.diningfinder.R" />
+
+        <variable
+            name="viewModel"
+            type="com.elbehiry.diningfinder.map.MapViewModel" />
+
+        <variable
+            name="permissionGranted"
+            type="Boolean" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/map_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:menu="@menu/map_menu"
+            app:title="@string/title_map" />
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:goneUnless="@{permissionGranted}"
+            app:isIndoorEnabled="@{false}"
+            app:isMapToolbarEnabled="@{false}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:mapStyle="@{viewModel.mapVariant.styleResId}" />
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/map_mode_fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:layout_margin="@dimen/margin_normal"
+                android:contentDescription="@string/a11y_select_map_mode"
+                app:fabVisibility="@{permissionGranted}"
+                app:srcCompat="@drawable/ic_layers" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bottom_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/filters_sheet_background"
+                android:backgroundTint="?attr/colorSurface"
+                android:elevation="@dimen/bottom_sheet_elevation"
+                app:behavior_hideable="true"
+                app:behavior_peekHeight="@dimen/map_bottom_sheet_peek_height"
+                app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/guide_peek_height"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintGuide_begin="@dimen/map_bottom_sheet_peek_height" />
+
+                <androidx.core.widget.NestedScrollView
+                    android:id="@+id/description_scrollview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:minHeight="1px"
+                    android:paddingTop="@dimen/map_bottom_sheet_peek_height"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <TextView
+                        android:id="@+id/marker_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="@dimen/margin_normal"
+                        android:textAlignment="viewStart" />
+                </androidx.core.widget.NestedScrollView>
+
+                <View
+                    android:id="@+id/clickable"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="?selectableItemBackground"
+                    app:layout_constraintBottom_toBottomOf="@id/guide_peek_height"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/expand_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_expand_more"
+                    app:layout_constraintBottom_toBottomOf="@id/guide_peek_height"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/marker_title"
+                    style="@style/WidgetMap"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    app:layout_constraintBottom_toTopOf="@id/marker_subtitle"
+                    app:layout_constraintEnd_toStartOf="@id/expand_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/bottom_sheet"
+                    app:layout_constraintVertical_chainStyle="packed"
+                    tools:text="Sandbox A" />
+
+                <TextView
+                    android:id="@+id/marker_subtitle"
+                    style="@style/Widget.Map.MarkerSubtitle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_normal"
+                    android:layout_marginEnd="@dimen/margin_normal"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toTopOf="@id/guide_peek_height"
+                    app:layout_constraintEnd_toStartOf="@id/expand_icon"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/marker_title"
+                    tools:text="Accessiblity &amp; Material Design"
+                    tools:visibility="visible" />
+
+                <View
+                    android:id="@+id/sheet_header_shadow"
+                    android:layout_width="0dp"
+                    android:layout_height="4dp"
+                    android:alpha="0"
+                    android:background="@drawable/filters_sheet_header_shadow"
+                    android:stateListAnimator="@animator/active_alpha"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/guide_peek_height" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:elevation="@dimen/margin_small"
+                android:visibility="gone"
+                app:goneUnless="@{viewModel.isLoading &amp;&amp; permissionGranted}">
+
+                <ProgressBar
+                    android:id="@+id/loading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:indeterminate="true"
+                    android:indeterminateTint="@color/color_primary"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+
+        <TextView
+            android:id="@+id/locationNeededTxt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/margin_normal"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:gravity="center"
+            android:text="@string/my_location_rationale"
+            android:textAppearance="@style/TextAppearance.H3"
+            app:layout_constraintBottom_toBottomOf="@+id/map"
+            app:layout_constraintEnd_toStartOf="@+id/map"
+            app:layout_constraintStart_toEndOf="@+id/map"
+            app:layout_constraintTop_toTopOf="parent"
+            app:visibleUnless="@{permissionGranted}" />
+
+        <Button
+            android:id="@+id/buttonLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_large"
+            android:text="@string/request_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationNeededTxt"
+            app:visibleUnless="@{permissionGranted}"
+            tools:text="Request Location" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
