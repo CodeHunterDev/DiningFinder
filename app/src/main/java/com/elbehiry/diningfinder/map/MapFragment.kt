@@ -30,6 +30,7 @@ import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.elbehiry.diningfinder.R
 import com.elbehiry.diningfinder.databinding.FragmentMapBinding
 import com.elbehiry.diningfinder.map.variant.MapVariantSelectionDialogFragment
@@ -244,6 +245,7 @@ class MapFragment : Fragment() {
     }
 
     private fun navigateToDetails(id: String?) {
+        findNavController().navigate(MapFragmentDirections.toDetails(itemId = id))
     }
 
     private fun handleToolBarMenuAction() {

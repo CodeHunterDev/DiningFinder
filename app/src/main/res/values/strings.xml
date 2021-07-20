@@ -13,4 +13,5 @@
     <string name="map_variant_standard">Standard</string>
     <string name="request_location">Reqest Location</string>
     <string name="something_went_worng">Something went wrong</string>
+    <string name="title_map_details">Restaurant Details</string>
 </resources>
