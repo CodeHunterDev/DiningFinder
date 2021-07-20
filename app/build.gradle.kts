@@ -51,9 +51,19 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            resValue(
+                "string",
+                "google_maps_key",
+                "AIzaSyCeWgfOFYvG7PYq4tfKUOFw5LTp4-eCBG8"
+            )
         }
         getByName("debug") {
             versionNameSuffix = "-debug"
+            resValue(
+                "string",
+                "google_maps_key",
+                "AIzaSyCeWgfOFYvG7PYq4tfKUOFw5LTp4-eCBG8"
+            )
         }
     }
 
@@ -100,6 +110,8 @@ dependencies {
     testImplementation(Libs.ARCH_TESTING)
     implementation(Libs.NAVIGATION_FRAGMENT_KTX)
     implementation(Libs.NAVIGATION_UI_KTX)
+    implementation(Libs.LIFECYCLE_RUNTIME_KTX)
+    kapt(Libs.LIFECYCLE_COMPILER)
 
     // Dagger Hilt
     implementation(Libs.HILT_ANDROID)
@@ -125,10 +137,21 @@ dependencies {
 
     // Local unit tests
     testImplementation(Libs.JUNIT)
-    testImplementation(Libs.MOCKITO_CORE)
-    testImplementation(Libs.MOCKITO_KOTLIN)
     testImplementation(Libs.HAMCREST)
+    testImplementation(Libs.FAKER)
+    testImplementation(Libs.TURBINE)
+    testImplementation(Libs.EXT_JUNIT)
+    testImplementation(Libs.ASSERT_J)
+    testImplementation(Libs.MOCKK)
 
-    implementation(Libs.GSON)
+    // play service
+    implementation(Libs.COROUTINES_PLAY_SERVICE)
+    implementation(Libs.PLAY_SERVICE_LOCATION)
+
+    // Maps
+    api(Libs.GOOGLE_MAP_UTILS_KTX) {
+        exclude(group = "com.google.android.gms")
+    }
+    api(Libs.GOOGLE_PLAY_SERVICES_MAPS_KTX)
 }
 apply(plugin = "com.google.gms.google-services")

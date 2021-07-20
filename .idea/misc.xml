@@ -3,9 +3,24 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable/default_map.xml" value="0.14629629629629629" />
+        <entry key="app/src/main/res/drawable/filters_sheet_header_shadow.xml" value="0.1259259259259259" />
+        <entry key="app/src/main/res/drawable/ic_expand_more.xml" value="0.1259259259259259" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/ic_layers.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/ic_map_after_dark.xml" value="0.14629629629629629" />
+        <entry key="app/src/main/res/drawable/ic_map_daytime.xml" value="0.1259259259259259" />
+        <entry key="app/src/main/res/drawable/ic_my_location.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/drawable/map_marker_label_background.xml" value="0.14629629629629629" />
         <entry key="app/src/main/res/font/google_sans_medium.xml" value="0.1287037037037037" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.11277173913043478" />
+        <entry key="app/src/main/res/layout/fragment_map.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_map_variant_select.xml" value="0.45" />
         <entry key="app/src/main/res/layout/google_sans.xml" value="0.11277173913043478" />
+        <entry key="app/src/main/res/layout/item_map_variant.xml" value="0.1068840579710145" />
+        <entry key="app/src/main/res/layout/map_bottom_sheet_view.xml" value="0.11277173913043478" />
+        <entry key="app/src/main/res/menu/map_menu.xml" value="0.19375" />
       </map>
     </option>
   </component>

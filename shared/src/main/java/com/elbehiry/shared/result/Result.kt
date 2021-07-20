@@ -16,7 +16,7 @@
 
 package com.elbehiry.shared.result
 
-import java.lang.Exception
+import com.elbehiry.shared.result.Result.Success
 
 sealed class Result<out R> {
     data class Success<out T>(val data: T) : Result<T>()
@@ -25,4 +25,4 @@ sealed class Result<out R> {
 }
 
 val <T> Result<T>.data: T?
-    get() = (this as? Result.Success)?.data
+    get() = (this as? Success)?.data

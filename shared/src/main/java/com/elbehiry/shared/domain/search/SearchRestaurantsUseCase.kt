@@ -19,16 +19,18 @@ package com.elbehiry.shared.domain.search
 import com.elbehiry.model.VenuesItem
 import com.elbehiry.shared.data.search.repository.SearchRepository
 import com.elbehiry.shared.di.IoDispatcher
-import com.elbehiry.shared.domain.UseCase
+import com.elbehiry.shared.domain.FlowUseCase
+import com.elbehiry.shared.result.Result
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class SearchRestaurantsUseCase @Inject constructor(
     private val searchRepository: SearchRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : UseCase<SearchRestaurantsUseCase.Params, List<VenuesItem>>(ioDispatcher) {
+) : FlowUseCase<SearchRestaurantsUseCase.Params, List<VenuesItem>>(ioDispatcher) {
 
-    override suspend fun execute(parameters: Params): List<VenuesItem> =
+    override fun execute(parameters: Params): Flow<Result<List<VenuesItem>>> =
         searchRepository.search(
             parameters.latLng,
             parameters.version,
@@ -48,8 +50,8 @@ class SearchRestaurantsUseCase @Inject constructor(
             fun create(
                 latLng: String,
                 version: String,
-                radius: Int?,
-                limit: Int?
+                radius: Int? = null,
+                limit: Int? = null
             ): Params {
                 return Params(latLng, version, radius, limit)
             }

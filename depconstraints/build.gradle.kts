@@ -71,6 +71,8 @@ val faker = "1.0.2"
 val binder = "1.0.0-alpha01"
 val turbine = "0.5.2"
 val assertJVersion = "3.19.0"
+val playServiceLocation = "18.0.0"
+val mockkVersion = "1.10.6"
 
 dependencies {
     constraints {
@@ -83,6 +85,7 @@ dependencies {
         api("${Libs.CORE_KTX}:$core")
         api("${Libs.COROUTINES}:$coroutines")
         api("${Libs.COROUTINES_TEST}:$coroutines")
+        api("${Libs.COROUTINES_PLAY_SERVICE}:$coroutines")
         api("${Libs.DRAWER_LAYOUT}:$drawerLayout")
         api("${Libs.ESPRESSO_CORE}:$espresso")
         api("${Libs.ESPRESSO_CONTRIB}:$espresso")
@@ -123,6 +126,11 @@ dependencies {
         api("${Libs.HILT_BINDER_COMPILER}:$binder")
         api("${Libs.TURBINE}:$turbine")
         api("${Libs.ASSERT_J}:$assertJVersion")
+        api("${Libs.LIFECYCLE_COMPILER}:$lifecycle")
+        api("${Libs.LIFECYCLE_RUNTIME_KTX}:$lifecycle")
+        api("${Libs.LIFECYCLE_VIEW_MODEL_KTX}:$lifecycle")
+        api("${Libs.PLAY_SERVICE_LOCATION}:$playServiceLocation")
+        api("${Libs.MOCKK}:$mockkVersion")
     }
 }
 

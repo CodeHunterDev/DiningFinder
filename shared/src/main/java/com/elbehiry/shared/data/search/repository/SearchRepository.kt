@@ -17,12 +17,14 @@
 package com.elbehiry.shared.data.search.repository
 
 import com.elbehiry.model.VenuesItem
+import com.elbehiry.shared.result.Result
+import kotlinx.coroutines.flow.Flow
 
 interface SearchRepository {
-    suspend fun search(
+    fun search(
         latLng: String,
         version: String,
         radius: Int?,
         limit: Int?
-    ): List<VenuesItem>
+    ): Flow<Result<List<VenuesItem>>>
 }
