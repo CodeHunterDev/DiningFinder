@@ -18,6 +18,20 @@ package com.elbehiry.model
 
 import com.squareup.moshi.Json
 
+data class RestaurantDetails(
+    val id: String? = null,
+    val name: String? = null,
+    val description: String? = null,
+    val dislike: Boolean? = null,
+    val createdAt: Long? = null,
+    val verified: Boolean? = null,
+    val phone: String? = null,
+    val country: String? = null,
+    val address: String? = null,
+    val city: String? = null,
+    val photoUrl: String? = null
+)
+
 data class DetailsItem(
 
     @Json(name = "response")
@@ -43,7 +57,7 @@ data class Venue(
     val dislike: Boolean? = null,
 
     @Json(name = "createdAt")
-    val createdAt: Int? = null,
+    val createdAt: Long? = null,
 
     @Json(name = "verified")
     val verified: Boolean? = null,
@@ -54,8 +68,8 @@ data class Venue(
     @Json(name = "location")
     val location: Location? = null,
 
-    @Json(name = "photos")
-    val photos: Photos? = null
+    @Json(name = "bestPhoto")
+    val bestPhoto: Photo? = null
 )
 
 data class Contact(
@@ -63,17 +77,7 @@ data class Contact(
     val phone: String? = null,
 )
 
-data class Photos(
-    @Json(name = "groups")
-    val groups: List<GroupsItem?>? = null
-)
-
-data class GroupsItem(
-    @Json(name = "items")
-    val items: List<ItemsItem?>? = null
-)
-
-data class ItemsItem(
+data class Photo(
     @Json(name = "prefix")
     val prefix: String? = null,
 
