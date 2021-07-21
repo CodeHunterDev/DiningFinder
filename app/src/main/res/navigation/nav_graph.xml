@@ -2,33 +2,25 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    app:startDestination="@id/mapFragment">
+    app:startDestination="@id/navigation_map">
 
     <fragment
-        android:id="@+id/mapFragment"
-        android:name="com.elbehiry.diningfinder.map.MapFragment"
+        android:id="@id/navigation_map"
+        android:name="com.elbehiry.diningfinder.ui.map.MapFragment"
         android:label="@string/resturants"
         tools:layout="@layout/fragment_map">
 
         <action
             android:id="@+id/to_Details"
-            app:destination="@id/fragment_details">
-
-            <argument
-                android:name="itemId"
-                android:defaultValue="@null"
-                app:argType="string"
-                app:nullable="true" />
-        </action>
-
+            app:destination="@id/navigation_details"/>
     </fragment>
     <fragment
-        android:id="@+id/fragment_details"
-        android:name="com.elbehiry.diningfinder.details.DetailsFragment"
+        android:id="@id/navigation_details"
+        android:name="com.elbehiry.diningfinder.ui.details.DetailsFragment"
         android:label="@string/title_map_details"
         tools:layout="@layout/fragment_details">
         <argument
-            android:name="mapVariant"
+            android:name="itemId"
             android:defaultValue="@null"
             app:argType="string"
             app:nullable="true" />

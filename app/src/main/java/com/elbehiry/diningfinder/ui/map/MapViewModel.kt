@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.elbehiry.diningfinder.map
+package com.elbehiry.diningfinder.ui.map
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.elbehiry.diningfinder.map.variant.MapVariant
+import com.elbehiry.diningfinder.ui.map.variant.MapVariant
 import com.elbehiry.diningfinder.utils.WhileViewSubscribed
 import com.elbehiry.diningfinder.utils.tryOffer
 import com.elbehiry.model.LocationModel
@@ -129,7 +129,10 @@ class MapViewModel @Inject constructor(
         viewModelScope.launch {
             getRestaurantsUsingLocation
                 .debounce(300)
-                .distinctUntilChanged()
+                .distinctUntilChanged { old, new ->
+                    old.latitude == new.latitude &&
+                        old.longitude == new.longitude
+                }
                 .collect {
                     getRestaurants.emit(it)
                 }
@@ -178,5 +181,8 @@ class MapViewModel @Inject constructor(
 
     fun dismissFeatureDetails() {
         _selectedMarkerInfo.value = null
+    }
+
+    fun reCenterMapCamera() {
     }
 }

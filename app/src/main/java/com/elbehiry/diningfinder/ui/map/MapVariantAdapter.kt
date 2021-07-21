@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.diningfinder.map
+package com.elbehiry.diningfinder.ui.map
 
 import android.os.Build
 import android.view.LayoutInflater
@@ -26,7 +26,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.elbehiry.diningfinder.R
 import com.elbehiry.diningfinder.databinding.ItemMapVariantBinding
-import com.elbehiry.diningfinder.map.variant.MapVariant
+import com.elbehiry.diningfinder.ui.map.variant.MapVariant
 import com.elbehiry.diningfinder.utils.executeAfter
 
 internal class MapVariantAdapter(

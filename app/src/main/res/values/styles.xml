@@ -7,6 +7,8 @@
         <item name="titleTextAppearance">@style/TextAppearance.ToolbarTitle</item>
     </style>
 
+    <style name="Widget.Dining" parent="@android:style/Widget.Material" />
+
     <style name="AppTheme.PopupTheme" parent="ThemeOverlay.Light" />
 
     <style name="TextAppearance.ToolbarTitle" parent="@style/TextAppearance.Widget.AppCompat.Toolbar.Title">
@@ -79,4 +81,15 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:letterSpacing">-0.03</item>
     </style>
+
+    <style name="Widget.Dining.Title">
+        <item name="android:gravity">center_horizontal</item>
+        <item name="android:textAppearance">@style/TextAppearance.H1</item>
+    </style>
+
+    <style name="Widget.Dining.MultilineBody">
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:textColor">?android:textColorSecondary</item>
+    </style>
+
 </resources>

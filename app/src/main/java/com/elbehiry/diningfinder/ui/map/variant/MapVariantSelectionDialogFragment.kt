@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.diningfinder.map.variant
+package com.elbehiry.diningfinder.ui.map.variant
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -31,8 +31,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import com.elbehiry.diningfinder.R
-import com.elbehiry.diningfinder.map.MapVariantAdapter
-import com.elbehiry.diningfinder.map.MapViewModel
+import com.elbehiry.diningfinder.ui.map.MapVariantAdapter
+import com.elbehiry.diningfinder.ui.map.MapViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

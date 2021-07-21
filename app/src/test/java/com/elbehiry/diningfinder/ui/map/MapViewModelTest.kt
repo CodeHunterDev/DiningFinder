@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package com.elbehiry.diningfinder.map
+package com.elbehiry.diningfinder.ui.map
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import app.cash.turbine.test
-import com.elbehiry.diningfinder.map.variant.MapVariant
+import com.elbehiry.diningfinder.ui.map.variant.MapVariant
 import com.elbehiry.model.LocationModel
 import com.elbehiry.shared.domain.location.GetCurrentLocationUseCase
 import com.elbehiry.shared.domain.search.CreateFoursquareVersionUseCase
