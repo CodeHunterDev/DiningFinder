@@ -16,6 +16,10 @@
 
 package com.elbehiry.shared.di
 
+import com.elbehiry.shared.data.details.remote.DetailsDataSource
+import com.elbehiry.shared.data.details.remote.RestaurantDetailsRemoteDataSource
+import com.elbehiry.shared.data.details.repository.DetailsRepository
+import com.elbehiry.shared.data.details.repository.DetailsRestaurantRepository
 import com.elbehiry.shared.data.remote.DiningApi
 import com.elbehiry.shared.data.search.remote.SearchDataSource
 import com.elbehiry.shared.data.search.remote.SearchRestaurantsDataSource
@@ -39,4 +43,14 @@ class SearchModule {
         searchDataSource: SearchDataSource
     ): SearchRepository =
         SearchRestaurantsRepository(searchDataSource)
+
+    @Provides
+    fun provideDetailsDataSource(api: DiningApi): DetailsDataSource =
+        RestaurantDetailsRemoteDataSource(api)
+
+    @Provides
+    fun provideDetailsRepository(
+        detailsDataSource: DetailsDataSource
+    ): DetailsRepository =
+        DetailsRestaurantRepository(detailsDataSource)
 }
