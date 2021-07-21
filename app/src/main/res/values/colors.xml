@@ -25,6 +25,6 @@
     <color name="list_divider">#1f000000</color>>
     <color name="event_card_header_background_light">#f8f9fa</color>
     <color name="event_card_header_background_dark">#252729</color>
-    <item name="chip_bg_alpha_checked" format="float" type="dimen">0.18</item>
+    <color name="light_gray">#D6D6D6</color>
 
 </resources>
