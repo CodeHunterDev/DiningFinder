@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.diningfinder.map
+package com.elbehiry.diningfinder.ui.map
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -30,9 +30,10 @@ import androidx.core.view.marginBottom
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.elbehiry.diningfinder.R
 import com.elbehiry.diningfinder.databinding.FragmentMapBinding
-import com.elbehiry.diningfinder.map.variant.MapVariantSelectionDialogFragment
+import com.elbehiry.diningfinder.ui.map.variant.MapVariantSelectionDialogFragment
 import com.elbehiry.diningfinder.utils.launchAndRepeatWithViewLifecycle
 import com.elbehiry.diningfinder.utils.slideOffsetToAlpha
 import com.elbehiry.model.VenuesItem
@@ -151,7 +152,7 @@ class MapFragment : Fragment() {
                 }
 
                 setOnInfoWindowClickListener { marker ->
-                    navigateToDetails(marker.id)
+                    navigateToDetails((marker?.tag as VenuesItem).id)
                 }
             }
         }
@@ -244,6 +245,7 @@ class MapFragment : Fragment() {
     }
 
     private fun navigateToDetails(id: String?) {
+        findNavController().navigate(MapFragmentDirections.toDetails(itemId = id))
     }
 
     private fun handleToolBarMenuAction() {

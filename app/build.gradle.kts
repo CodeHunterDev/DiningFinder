@@ -33,7 +33,7 @@ android {
         targetSdk = Versions.TARGET_SDK
         versionCode = Versions.versionCodeMobile
         versionName = Versions.versionName
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.elbehiry.diningfinder.CustomTestRunner"
 
         vectorDrawables.useSupportLibrary = true
 
@@ -133,6 +133,7 @@ dependencies {
     androidTestImplementation(Libs.RUNNER)
     androidTestImplementation(Libs.RULES)
     androidTestImplementation(Libs.FRAGMENT_TEST)
+    androidTestImplementation(Libs.NAVIGATION_TESTING)
     debugImplementation(Libs.FRAGMENT_TEST)
 
     // Local unit tests

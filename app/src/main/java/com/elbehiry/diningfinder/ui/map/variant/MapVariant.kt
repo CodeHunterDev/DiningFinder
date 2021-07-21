@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.diningfinder.map.variant
+package com.elbehiry.diningfinder.ui.map.variant
 
 import androidx.annotation.DrawableRes
 import androidx.annotation.RawRes

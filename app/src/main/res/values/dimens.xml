@@ -18,6 +18,7 @@
     <dimen name="bottom_sheet_corner_radius">16dp</dimen>
     <dimen name="bottom_sheet_elevation">8dp</dimen>
     <dimen name="map_bottom_sheet_peek_height">56dp</dimen>
+    <dimen name="restaurant_image_height">220dp</dimen>
 
     <item name="map_camera_zoom" type="dimen" format="float">16.4</item>
     <item name="map_viewport_max_zoom" type="dimen" format="float">19.75</item>

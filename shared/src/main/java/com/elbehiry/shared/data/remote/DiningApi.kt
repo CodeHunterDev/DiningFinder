@@ -16,9 +16,11 @@
 
 package com.elbehiry.shared.data.remote
 
+import com.elbehiry.model.DetailsItem
 import com.elbehiry.model.SearchItem
 import com.elbehiry.shared.BuildConfig
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 const val foodDefaultCategoryId = "4d4b7105d754a06374d81259"
@@ -35,4 +37,12 @@ interface DiningApi {
         @Query("limit") limit: Int,
         @Query("categoryId") categoryId: String = foodDefaultCategoryId
     ): SearchItem
+
+    @GET("v2/venues/{venue_id}")
+    suspend fun getDetails(
+        @Path("venue_id") venueId: String,
+        @Query("v") version: String,
+        @Query("client_id") clientId: String = BuildConfig.CLIENT_ID,
+        @Query("client_secret") clientSecret: String = BuildConfig.SECRET_ID
+    ): DetailsItem
 }

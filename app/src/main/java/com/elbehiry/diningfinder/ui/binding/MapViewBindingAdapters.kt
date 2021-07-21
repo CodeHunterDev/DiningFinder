@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.elbehiry.diningfinder.map.binding
+package com.elbehiry.diningfinder.ui.binding
 
 import android.view.View
 import androidx.annotation.DimenRes

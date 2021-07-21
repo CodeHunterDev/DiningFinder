@@ -9,7 +9,7 @@
 
         <variable
             name="viewModel"
-            type="com.elbehiry.diningfinder.map.MapViewModel" />
+            type="com.elbehiry.diningfinder.ui.map.MapViewModel" />
 
         <variable
             name="permissionGranted"
