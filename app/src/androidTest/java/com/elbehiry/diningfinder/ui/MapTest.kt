@@ -34,7 +34,6 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
-
 /**
  * Espresso tests for the Map screen.
  */
@@ -48,7 +47,7 @@ class MapTest {
     @get:Rule(order = 1)
     var activityRule = MainActivityTestRule(R.id.navigation_map)
 
-    @get:Rule (order = 2)
+    @get:Rule(order = 2)
     var permissionRule = GrantPermissionRule.grant(android.Manifest.permission.ACCESS_FINE_LOCATION)
 
     @Before
@@ -57,9 +56,9 @@ class MapTest {
     }
 
     /**
-         * this is an issue with Dagger hilt fragments must be attached
-         *  to an @AndroidEntryPoint activity.
-         */
+     * this is an issue with Dagger hilt fragments must be attached
+     *  to an @AndroidEntryPoint activity.
+     */
 //        val navController = TestNavHostController(ApplicationProvider.getApplicationContext())
 //        val mapScenario = launchFragmentInContainer<MapFragment>()
 //        mapScenario.onFragment { fragment ->

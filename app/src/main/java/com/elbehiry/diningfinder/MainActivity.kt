@@ -38,12 +38,10 @@ class MainActivity : AppCompatActivity() {
         const val EXTRA_NAVIGATION_ID = "extra.NAVIGATION_ID"
         private const val NAV_ID_NONE = -1
 
-
         private val TOP_LEVEL_DESTINATIONS = setOf(
             R.id.navigation_map,
             R.id.navigation_details
         )
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
