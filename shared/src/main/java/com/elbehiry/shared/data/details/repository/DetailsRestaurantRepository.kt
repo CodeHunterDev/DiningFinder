@@ -16,7 +16,7 @@
 
 package com.elbehiry.shared.data.details.repository
 
-import com.elbehiry.model.DetailsItem
+import com.elbehiry.model.RestaurantDetails
 import com.elbehiry.shared.data.details.remote.DetailsDataSource
 import javax.inject.Inject
 
@@ -24,6 +24,6 @@ class DetailsRestaurantRepository @Inject constructor(
     private val detailsDataSource: DetailsDataSource
 ) : DetailsRepository {
 
-    override suspend fun getDetails(venueId: String, version: String): DetailsItem =
+    override suspend fun getDetails(venueId: String, version: String): RestaurantDetails =
         detailsDataSource.getDetails(venueId, version)
 }

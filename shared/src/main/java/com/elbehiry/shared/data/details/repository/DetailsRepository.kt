@@ -16,12 +16,12 @@
 
 package com.elbehiry.shared.data.details.repository
 
-import com.elbehiry.model.DetailsItem
+import com.elbehiry.model.RestaurantDetails
 
 interface DetailsRepository {
 
     suspend fun getDetails(
         venueId: String,
         version: String
-    ): DetailsItem
+    ): RestaurantDetails
 }

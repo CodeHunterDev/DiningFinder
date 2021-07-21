@@ -16,7 +16,7 @@
 
 package com.elbehiry.shared.domain.details
 
-import com.elbehiry.model.DetailsItem
+import com.elbehiry.model.RestaurantDetails
 import com.elbehiry.shared.data.details.repository.DetailsRepository
 import com.elbehiry.shared.di.IoDispatcher
 import com.elbehiry.shared.domain.UseCase
@@ -26,9 +26,9 @@ import javax.inject.Inject
 class GetRestaurantDetailsUseCase @Inject constructor(
     private val detailsRepository: DetailsRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher
-) : UseCase<GetRestaurantDetailsUseCase.Params, DetailsItem>(ioDispatcher) {
+) : UseCase<GetRestaurantDetailsUseCase.Params, RestaurantDetails>(ioDispatcher) {
 
-    override suspend fun execute(parameters: Params): DetailsItem =
+    override suspend fun execute(parameters: Params): RestaurantDetails =
         detailsRepository.getDetails(parameters.venueId, parameters.version)
 
     class Params private constructor(

@@ -36,9 +36,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 @RunWith(MockitoJUnitRunner::class)
 class SearchRepositoryTest {
 

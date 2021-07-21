@@ -16,13 +16,14 @@
 
 package com.elbehiry.shared.data.details.remote
 
-import com.elbehiry.model.DetailsItem
+import com.elbehiry.model.RestaurantDetails
+import com.elbehiry.shared.data.details.mapper.toRestaurantModel
 import com.elbehiry.shared.data.remote.DiningApi
 import javax.inject.Inject
 
 class RestaurantDetailsRemoteDataSource @Inject constructor(
     private val api: DiningApi
 ) : DetailsDataSource {
-    override suspend fun getDetails(venueId: String, version: String): DetailsItem =
-        api.getDetails(venueId, version)
+    override suspend fun getDetails(venueId: String, version: String): RestaurantDetails =
+        api.getDetails(venueId, version).toRestaurantModel()
 }
