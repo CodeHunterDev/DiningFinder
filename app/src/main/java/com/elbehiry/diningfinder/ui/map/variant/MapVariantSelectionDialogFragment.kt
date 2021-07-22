@@ -37,6 +37,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * Dialog to show and choosing map variant.
+ */
 @AndroidEntryPoint
 class MapVariantSelectionDialogFragment : AppCompatDialogFragment() {
 
