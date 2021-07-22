@@ -25,6 +25,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+/**
+ * Get current user location.
+ */
 class GetCurrentLocationUseCase @Inject constructor(
     private val locationRepository: ILocationRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher

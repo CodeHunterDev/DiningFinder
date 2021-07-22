@@ -16,11 +16,13 @@
 
 package com.elbehiry.diningfinder.ui.map
 
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.elbehiry.diningfinder.ui.map.variant.MapVariant
 import com.elbehiry.diningfinder.utils.WhileViewSubscribed
 import com.elbehiry.diningfinder.utils.tryOffer
+import com.elbehiry.model.Location
 import com.elbehiry.model.LocationModel
 import com.elbehiry.model.VenuesItem
 import com.elbehiry.shared.domain.location.GetCurrentLocationUseCase
@@ -56,11 +58,17 @@ import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
 
+const val cameraUpdatesKey = "cameraUpdatesKey"
+
+/**
+ * [ViewModel] for [MapFragment].
+ */
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val searchRestaurantsUseCase: SearchRestaurantsUseCase,
     private val createFoursquareVersionUseCase: CreateFoursquareVersionUseCase,
-    private val getCurrentLocationUseCase: GetCurrentLocationUseCase
+    private val getCurrentLocationUseCase: GetCurrentLocationUseCase,
+    private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
 
     private val _errorMessage = Channel<String>(1, BufferOverflow.DROP_LATEST)
@@ -131,7 +139,7 @@ class MapViewModel @Inject constructor(
                 .debounce(300)
                 .distinctUntilChanged { old, new ->
                     old.latitude == new.latitude &&
-                        old.longitude == new.longitude
+                            old.longitude == new.longitude
                 }
                 .collect {
                     getRestaurants.emit(it)
@@ -139,12 +147,25 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Validate if there is camera updates in the cache.
+     * Call the get restaurants near using current location.
+     */
     fun getRestaurantByCurrentLocation() {
+        val cameraUpdates: LatLng? = savedStateHandle[cameraUpdatesKey]
+        cameraUpdates?.let {
+            offerCameraUpdates(cameraUpdates)
+        }
         viewModelScope.launch {
             getRestaurants.emit(null)
         }
     }
 
+    /**
+     * This to get the restaurant using a specific position, depending on camera position.
+     *
+     * @param target
+     */
     fun getRestaurantsInPosition(target: LatLng?) {
         target?.let {
             viewModelScope.launch {
@@ -153,6 +174,13 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Highlight a specific venue item and move the camera towards.
+     *
+     * @param venuesItem
+     * @param immediateHighLight
+     * @param shouldZoomCamera
+     */
     fun highlightVenuesItem(
         venuesItem: VenuesItem?,
         immediateHighLight: Boolean = false,
@@ -162,13 +190,21 @@ class MapViewModel @Inject constructor(
             venuesItem?.let {
                 _selectedMarkerInfo.value = venuesItem
                 if (shouldZoomCamera) {
-                    val update = CameraUpdateFactory.newLatLngZoom(
-                        LatLng(venuesItem.location.lat, venuesItem.location.lng), 16.4f
-                    )
-                    _mapCenterEvent.tryOffer(update)
+                    val latLng = LatLng(venuesItem.location.lat, venuesItem.location.lng)
+                    saveCurrentLatLng(latLng)
+                    offerCameraUpdates(latLng)
                 }
             }
         }
+    }
+
+    private fun saveCurrentLatLng(latLng: LatLng) {
+        savedStateHandle[cameraUpdatesKey] = latLng
+    }
+
+    private fun offerCameraUpdates(latLng: LatLng) {
+        val update = CameraUpdateFactory.newLatLngZoom(latLng, 16.4f)
+        _mapCenterEvent.tryOffer(update)
     }
 
     fun setMapVariant(variant: MapVariant) {
@@ -183,6 +219,7 @@ class MapViewModel @Inject constructor(
         _selectedMarkerInfo.value = null
     }
 
-    fun reCenterMapCamera() {
+    fun saveCurrentSelectedMarkerLocation(location: Location) {
+        saveCurrentLatLng(LatLng(location.lat,location.lng))
     }
 }

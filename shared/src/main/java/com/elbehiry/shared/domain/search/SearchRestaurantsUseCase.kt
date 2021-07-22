@@ -25,6 +25,9 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+/**
+ * Search for the nearby restaurant using [Params] value.
+ */
 class SearchRestaurantsUseCase @Inject constructor(
     private val searchRepository: SearchRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher

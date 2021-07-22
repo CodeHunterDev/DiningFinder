@@ -17,6 +17,7 @@
 package com.elbehiry.diningfinder.ui.map
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.elbehiry.diningfinder.ui.map.variant.MapVariant
 import com.elbehiry.model.LocationModel
@@ -31,10 +32,7 @@ import com.elbehiry.test_shared.VENUES_ITEMS
 import com.elbehiry.test_shared.MainCoroutineRule
 import com.elbehiry.test_shared.runBlockingTest
 import com.google.android.gms.maps.model.LatLng
-import io.mockk.Called
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.coVerify
+import io.mockk.*
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Assert
@@ -59,6 +57,9 @@ class MapViewModelTest {
     private lateinit var createFoursquareVersionUseCase: CreateFoursquareVersionUseCase
 
     @MockK
+    private lateinit var savedStateHandle: SavedStateHandle
+
+    @MockK
     private lateinit var getCurrentLocationUseCase: GetCurrentLocationUseCase
     private val locationModel by lazy {
         LocationModel(
@@ -73,11 +74,13 @@ class MapViewModelTest {
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
         coEvery { createFoursquareVersionUseCase(any()) } returns currentVersionCode
+        every { savedStateHandle.get<LatLng>(cameraUpdatesKey) } returns null
 
         mapViewModel = MapViewModel(
             searchRestaurantsUseCase,
             createFoursquareVersionUseCase,
-            getCurrentLocationUseCase
+            getCurrentLocationUseCase,
+            savedStateHandle
         )
     }
 
@@ -85,7 +88,7 @@ class MapViewModelTest {
     fun `get restaurant by current location returns values success`() =
         mainCoroutineRule.runBlockingTest {
             coEvery { getCurrentLocationUseCase(any()) } returns
-                flowOf(Success(locationModel))
+                    flowOf(Success(locationModel))
             coEvery { searchRestaurantsUseCase(any()) } returns flowOf(Success(VENUES_ITEMS))
             mapViewModel.getRestaurantByCurrentLocation()
             mapViewModel.venuesList.test {
@@ -98,7 +101,7 @@ class MapViewModelTest {
         mainCoroutineRule.runBlockingTest {
             val errorMessage = "Error in getting location"
             coEvery { getCurrentLocationUseCase(any()) } returns
-                flowOf(Error(Exception(errorMessage)))
+                    flowOf(Error(Exception(errorMessage)))
             coEvery { searchRestaurantsUseCase(any()) } returns flowOf(Success(VENUES_ITEMS))
             mapViewModel.getRestaurantByCurrentLocation()
             mapViewModel.errorMessage.test {
@@ -110,7 +113,7 @@ class MapViewModelTest {
     fun `errorMessage empty if get data return success states`() =
         mainCoroutineRule.runBlockingTest {
             coEvery { getCurrentLocationUseCase(any()) } returns
-                flowOf(Success(locationModel))
+                    flowOf(Success(locationModel))
             coEvery { searchRestaurantsUseCase(any()) } returns flowOf(Success(VENUES_ITEMS))
             mapViewModel.getRestaurantByCurrentLocation()
             mapViewModel.errorMessage.test {
@@ -123,10 +126,10 @@ class MapViewModelTest {
         mainCoroutineRule.runBlockingTest {
             val errorMessage = "Error in getting restaurants"
             coEvery { getCurrentLocationUseCase(any()) } returns
-                flowOf(Success(locationModel))
+                    flowOf(Success(locationModel))
 
             coEvery { searchRestaurantsUseCase(any()) } returns
-                flowOf(Error(Exception(errorMessage)))
+                    flowOf(Error(Exception(errorMessage)))
             mapViewModel.getRestaurantByCurrentLocation()
             mapViewModel.errorMessage.test {
                 Assert.assertEquals(expectItem(), errorMessage)
@@ -140,7 +143,7 @@ class MapViewModelTest {
                 Assert.assertTrue(expectItem())
             }
             coEvery { getCurrentLocationUseCase(any()) } returns
-                flowOf(Success(locationModel))
+                    flowOf(Success(locationModel))
             coEvery { searchRestaurantsUseCase(any()) } returns flowOf(Success(VENUES_ITEMS))
             mapViewModel.getRestaurantByCurrentLocation()
             mapViewModel.isLoading.test {
@@ -160,9 +163,6 @@ class MapViewModelTest {
             mapViewModel.getRestaurantsInPosition(target)
 
             coVerify { getCurrentLocationUseCase(any()) wasNot Called }
-            mapViewModel.venuesList.test {
-                Assert.assertEquals(expectItem(), VENUES_ITEMS)
-            }
         }
 
     @Test

@@ -48,6 +48,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
+/**
+ * Map screen to show the nearby restaurants based on current location.
+ */
 @AndroidEntryPoint
 class MapFragment : Fragment() {
 
@@ -83,6 +86,10 @@ class MapFragment : Fragment() {
         }
     }
 
+    /**
+     * Dialog to tell the user to accept the location permission.
+     * note that this appears just if the user deny the location permission.
+     */
     private fun showLocationPermissionMissingDialog() {
         MaterialAlertDialogBuilder(requireContext())
             .setMessage(R.string.my_location_rationale)
@@ -126,19 +133,34 @@ class MapFragment : Fragment() {
         }
 
         binding.mapModeFab.setOnClickListener {
-            MapVariantSelectionDialogFragment().show(childFragmentManager, "MAP_MODE_DIALOG")
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+                ) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                MapVariantSelectionDialogFragment().show(
+                    childFragmentManager,
+                    "MAP_MODE_DIALOG"
+                )
+            } else {
+                showLocationPermissionMissingDialog()
+            }
         }
 
-        binding.buttonLocation.setOnClickListener {
+        binding.locationNeededTxt.setOnClickListener {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
-        initView()
+        validateFabBottomMargin(binding.bottomSheet)
+        initOnMapClicks()
         initCallBacks()
         checkPermissionAndGetData()
     }
 
-    private fun initView() {
+    /**
+     * Add click listener on map features, such as marker click and info click.
+     */
+    private fun initOnMapClicks() {
         viewLifecycleOwner.lifecycleScope.launch {
             mapView.awaitMap().apply {
                 setOnMapClickListener { viewModel.dismissFeatureDetails() }
@@ -152,12 +174,17 @@ class MapFragment : Fragment() {
                 }
 
                 setOnInfoWindowClickListener { marker ->
-                    navigateToDetails((marker?.tag as VenuesItem).id)
+                    val item = marker?.tag as VenuesItem
+                    viewModel.saveCurrentSelectedMarkerLocation(item.location)
+                    navigateToDetails(item.id)
                 }
             }
         }
     }
 
+    /**
+     * Init the callbacks from the viewmodel and listen on flows results.
+     */
     private fun initCallBacks() {
         launchAndRepeatWithViewLifecycle {
             launch {
@@ -226,6 +253,10 @@ class MapFragment : Fragment() {
         }
     }
 
+    /**
+     * First check the location permission, if it's granted call get data from service.
+     * if not granted, request the location permission.
+     */
     private fun checkPermissionAndGetData() {
         val context = context ?: return
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) ==
@@ -268,6 +299,10 @@ class MapFragment : Fragment() {
     private fun onMyLocationClicked() {
     }
 
+    /**
+     * This bottom sheet to show the details for the selected marker.
+     * this function configure the [binding.mapModeFab] bottom margins also show/hide status.
+     */
     private fun configureBottomSheet() {
         bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheet)
         val bottomSheetCallback = object : BottomSheetBehavior.BottomSheetCallback() {
@@ -293,9 +328,7 @@ class MapFragment : Fragment() {
                     binding.mapModeFab.hide()
                 } else {
                     binding.mapModeFab.show()
-                    val ty = (bottomSheet.top - fabBaseMarginBottom - binding.mapModeFab.bottom)
-                        .coerceAtMost(0)
-                    binding.mapModeFab.translationY = ty.toFloat()
+                    validateFabBottomMargin(bottomSheet)
                 }
             }
         }
@@ -313,6 +346,20 @@ class MapFragment : Fragment() {
         }
     }
 
+    /**
+     * Translate the [binding.mapModeFab] by value.
+     * @param bottomSheet
+     */
+    private fun validateFabBottomMargin(bottomSheet: View) {
+        val ty = (bottomSheet.top - fabBaseMarginBottom - binding.mapModeFab.bottom)
+            .coerceAtMost(0)
+        binding.mapModeFab.translationY = ty.toFloat()
+    }
+
+    /**
+     * Add [VenuesItem] info in the bottom sheet.
+     * @param venuesItem
+     */
     private fun updateInfoSheet(venuesItem: VenuesItem) {
         binding.markerTitle.text = venuesItem.name
         binding.markerSubtitle.apply {
@@ -330,6 +377,10 @@ class MapFragment : Fragment() {
         binding.clickable.isVisible = hasDescription
     }
 
+    /**
+     * Used to save the current state of the map screen.
+     * @param outState
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         val mapViewBundle = outState.getBundle(MAPVIEW_BUNDLE_KEY)

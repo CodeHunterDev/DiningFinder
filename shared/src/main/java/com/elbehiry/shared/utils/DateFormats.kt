@@ -16,4 +16,7 @@
 
 package com.elbehiry.shared.utils
 
+/**
+ * Foursquare version format.
+ */
 const val fourSquareVersionFormat = "yyyyMMdd"
