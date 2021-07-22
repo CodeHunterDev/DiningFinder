@@ -23,6 +23,9 @@ import com.elbehiry.shared.domain.UseCase
 import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Inject
 
+/**
+ * Get restaurant details use-case using [Params] parameters.
+ */
 class GetRestaurantDetailsUseCase @Inject constructor(
     private val detailsRepository: DetailsRepository,
     @IoDispatcher private val ioDispatcher: CoroutineDispatcher

@@ -60,6 +60,9 @@ import javax.inject.Inject
 
 const val cameraUpdatesKey = "cameraUpdatesKey"
 
+/**
+ * [ViewModel] for [MapFragment].
+ */
 @HiltViewModel
 class MapViewModel @Inject constructor(
     private val searchRestaurantsUseCase: SearchRestaurantsUseCase,
@@ -144,6 +147,10 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Validate if there is camera updates in the cache.
+     * Call the get restaurants near using current location.
+     */
     fun getRestaurantByCurrentLocation() {
         val cameraUpdates: LatLng? = savedStateHandle[cameraUpdatesKey]
         cameraUpdates?.let {
@@ -154,6 +161,11 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    /**
+     * This to get the restaurant using a specific position, depending on camera position.
+     *
+     * @param target
+     */
     fun getRestaurantsInPosition(target: LatLng?) {
         target?.let {
             viewModelScope.launch {
@@ -162,6 +174,13 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Highlight a specific venue item and move the camera towards.
+     *
+     * @param venuesItem
+     * @param immediateHighLight
+     * @param shouldZoomCamera
+     */
     fun highlightVenuesItem(
         venuesItem: VenuesItem?,
         immediateHighLight: Boolean = false,

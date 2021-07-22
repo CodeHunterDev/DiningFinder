@@ -34,6 +34,9 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
+/**
+ * Get current location using [FusedLocationProviderClient].
+ */
 class LocationRemoteSource @Inject constructor(
     @ApplicationContext private val context: Context,
     private val fusedLocationClient: FusedLocationProviderClient =

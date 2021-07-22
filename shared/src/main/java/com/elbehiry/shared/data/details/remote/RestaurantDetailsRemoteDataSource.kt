@@ -21,6 +21,11 @@ import com.elbehiry.shared.data.details.mapper.toRestaurantModel
 import com.elbehiry.shared.data.remote.DiningApi
 import javax.inject.Inject
 
+/**
+ * Remote data source for getting [RestaurantDetails] using venue id.
+ *
+ * @property [DiningApi] to call get details end point.
+ */
 class RestaurantDetailsRemoteDataSource @Inject constructor(
     private val api: DiningApi
 ) : DetailsDataSource {

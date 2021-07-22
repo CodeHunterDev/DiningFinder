@@ -20,6 +20,11 @@ import com.elbehiry.model.RestaurantDetails
 import com.elbehiry.shared.data.details.remote.DetailsDataSource
 import javax.inject.Inject
 
+/**
+ * Get restaurant details repository.
+ *
+ * @property detailsDataSource
+ */
 class DetailsRestaurantRepository @Inject constructor(
     private val detailsDataSource: DetailsDataSource
 ) : DetailsRepository {
