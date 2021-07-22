@@ -6,6 +6,7 @@
     <data>
 
         <import type="com.elbehiry.diningfinder.R" />
+        <import type="android.view.View" />
 
         <variable
             name="viewModel"
@@ -61,7 +62,6 @@
                 android:layout_gravity="bottom|end"
                 android:layout_margin="@dimen/margin_normal"
                 android:contentDescription="@string/a11y_select_map_mode"
-                app:fabVisibility="@{permissionGranted}"
                 app:srcCompat="@drawable/ic_layers" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -182,36 +182,24 @@
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <TextView
+                android:id="@+id/locationNeededTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_normal"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:text="@string/location_permission_needed"
+                android:textAppearance="@style/TextAppearance.H3"
+                app:layout_constraintBottom_toBottomOf="@+id/map"
+                app:layout_constraintEnd_toStartOf="@+id/map"
+                app:layout_constraintStart_toEndOf="@+id/map"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visibleUnless="@{permissionGranted}" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-        <TextView
-            android:id="@+id/locationNeededTxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin_normal"
-            android:layout_marginStart="@dimen/margin_normal"
-            android:layout_marginEnd="@dimen/margin_normal"
-            android:gravity="center"
-            android:text="@string/my_location_rationale"
-            android:textAppearance="@style/TextAppearance.H3"
-            app:layout_constraintBottom_toBottomOf="@+id/map"
-            app:layout_constraintEnd_toStartOf="@+id/map"
-            app:layout_constraintStart_toEndOf="@+id/map"
-            app:layout_constraintTop_toTopOf="parent"
-            app:visibleUnless="@{permissionGranted}" />
-
-        <Button
-            android:id="@+id/buttonLocation"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_large"
-            android:text="@string/request_location"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationNeededTxt"
-            app:visibleUnless="@{permissionGranted}"
-            tools:text="Request Location" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
