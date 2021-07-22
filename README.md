@@ -30,6 +30,8 @@
 - Android Studio Version
   - Android Studio Arctic Fox | 2020.3.1
   
+feel free to test it 🤩
+just create your own Api Key from [foursquare](https://foursquare.com/developers) and add it into [build.gradle.kts](https://github.com/Elbehiry/DiningFinder/blob/1c5cac3675bb3887b50e9fbae861b2149cd58475/shared/build.gradle.kts#L74) file. 😉
 ## License
 ```xml
 Designed and developed by 2021 elbehiry
