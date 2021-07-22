@@ -19,7 +19,6 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
-    id("com.google.secrets_gradle_plugin") version "0.6.1"
 }
 
 android {
@@ -71,11 +70,18 @@ android {
     buildTypes {
         val urlName = "FOURSQUARE_BASE_URL"
         val baseUrl = "\"https://api.foursquare.com/\""
+        val clientKeyValue = ""
+        val secretKeyValue = ""
+
         getByName("release") {
             buildConfigField("String", urlName, baseUrl)
+            buildConfigField("String", "CLIENT_ID", clientKeyValue)
+            buildConfigField("String", "SECRET_ID", secretKeyValue)
         }
         getByName("debug") {
             buildConfigField("String", urlName, baseUrl)
+            buildConfigField("String", "CLIENT_ID", clientKeyValue)
+            buildConfigField("String", "SECRET_ID", secretKeyValue)
         }
     }
 
