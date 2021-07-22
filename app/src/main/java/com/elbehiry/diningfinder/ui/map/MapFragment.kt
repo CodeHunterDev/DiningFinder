@@ -126,13 +126,25 @@ class MapFragment : Fragment() {
         }
 
         binding.mapModeFab.setOnClickListener {
-            MapVariantSelectionDialogFragment().show(childFragmentManager, "MAP_MODE_DIALOG")
+            if (ContextCompat.checkSelfPermission(
+                    requireContext(), Manifest.permission.ACCESS_FINE_LOCATION
+                ) ==
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                MapVariantSelectionDialogFragment().show(
+                    childFragmentManager,
+                    "MAP_MODE_DIALOG"
+                )
+            } else {
+                showLocationPermissionMissingDialog()
+            }
         }
 
-        binding.buttonLocation.setOnClickListener {
+        binding.locationNeededTxt.setOnClickListener {
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
+        validateFabBottomMargin(binding.bottomSheet)
         initView()
         initCallBacks()
         checkPermissionAndGetData()
@@ -152,7 +164,9 @@ class MapFragment : Fragment() {
                 }
 
                 setOnInfoWindowClickListener { marker ->
-                    navigateToDetails((marker?.tag as VenuesItem).id)
+                    val item = marker?.tag as VenuesItem
+                    viewModel.saveCurrentSelectedMarkerLocation(item.location)
+                    navigateToDetails(item.id)
                 }
             }
         }
@@ -293,9 +307,7 @@ class MapFragment : Fragment() {
                     binding.mapModeFab.hide()
                 } else {
                     binding.mapModeFab.show()
-                    val ty = (bottomSheet.top - fabBaseMarginBottom - binding.mapModeFab.bottom)
-                        .coerceAtMost(0)
-                    binding.mapModeFab.translationY = ty.toFloat()
+                    validateFabBottomMargin(bottomSheet)
                 }
             }
         }
@@ -311,6 +323,12 @@ class MapFragment : Fragment() {
             bottomSheetCallback.onStateChanged(binding.bottomSheet, state)
             bottomSheetCallback.onSlide(binding.bottomSheet, slideOffset)
         }
+    }
+
+    private fun validateFabBottomMargin(bottomSheet: View) {
+        val ty = (bottomSheet.top - fabBaseMarginBottom - binding.mapModeFab.bottom)
+            .coerceAtMost(0)
+        binding.mapModeFab.translationY = ty.toFloat()
     }
 
     private fun updateInfoSheet(venuesItem: VenuesItem) {
