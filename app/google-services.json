@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "802567621278",
+    "project_id": "diningfinder",
+    "storage_bucket": "diningfinder.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:802567621278:android:93856115c64bed544f898f",
+        "android_client_info": {
+          "package_name": "com.elbehiry.diningfinder"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "802567621278-tiq3h2at2q01s4bf4ufqms03grjs6uth.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.elbehiry.diningfinder",
+            "certificate_hash": "6bd7ffdf3e514b4da10d6b9e9b627fbbc25f1c8c"
+          }
+        },
+        {
+          "client_id": "802567621278-cacbuf6j1bkngato4jba3iutg6f3trf3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCeWgfOFYvG7PYq4tfKUOFw5LTp4-eCBG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "802567621278-cacbuf6j1bkngato4jba3iutg6f3trf3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

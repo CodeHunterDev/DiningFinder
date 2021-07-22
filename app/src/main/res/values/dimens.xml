@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Dialogs -->
+    <dimen name="dialog_corner_radius">8dp</dimen>
+    <dimen name="dialogPreferredPadding">24dp</dimen>
+    <dimen name="dialogPreferredPaddingLarge">36dp</dimen> <!-- dialogPreferredPadding + 12dp -->
+
+    <dimen name="margin_normal">16dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_large">32dp</dimen>
+    <dimen name="spacing_normal">8dp</dimen>
+    <dimen name="spacing_micro">4dp</dimen>
+
+    <dimen name="text_size_h1">22sp</dimen>
+    <dimen name="text_size_h2">20sp</dimen>
+    <dimen name="text_size_h3">18sp</dimen>
+    <dimen name="bottom_sheet_corner_radius">16dp</dimen>
+    <dimen name="bottom_sheet_elevation">8dp</dimen>
+    <dimen name="map_bottom_sheet_peek_height">56dp</dimen>
+    <dimen name="restaurant_image_height">220dp</dimen>
+
+    <item name="map_camera_zoom" type="dimen" format="float">16.4</item>
+    <item name="map_viewport_max_zoom" type="dimen" format="float">19.75</item>
+    <item name="map_camera_bearing" type="dimen" format="float">0.0</item>
+</resources>

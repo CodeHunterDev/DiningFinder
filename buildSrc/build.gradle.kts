@@ -6,5 +6,5 @@ plugins {
 }
 
 repositories {
-    mavenCentral()
+    gradlePluginPortal()
 }

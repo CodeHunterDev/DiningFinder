@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.elbehiry.diningfinder.ui.details.DetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            style="@style/Widget.Toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="@string/title_map_details" />
+
+        <ImageView
+            android:id="@+id/speaker_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/restaurant_image_height"
+            android:layout_gravity="center_horizontal"
+            android:contentDescription="@null"
+            app:imageUrl="@{viewModel.restaurantDetails.photoUrl}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:placeholder="@{@drawable/place_holder}" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_start"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/margin_normal" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_end"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/margin_normal" />
+
+        <TextView
+            android:id="@+id/restaurantName"
+            style="@style/Widget.Dining.Title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_normal"
+            android:text="@{viewModel.restaurantDetails.name}"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/speaker_image"
+            tools:text="Fruits Lovers" />
+
+        <TextView
+            android:id="@+id/restaurantDesc"
+            style="@style/Widget.Dining.MultilineBody"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center"
+            android:text="@{viewModel.restaurantDetails.description}"
+            android:textColor="?android:textColorPrimary"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantName"
+            tools:text="@tools:sample/lorem[25]" />
+
+        <TextView
+            android:id="@+id/phone"
+            style="@style/TextAppearance.H3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:drawablePadding="@dimen/spacing_micro"
+            android:text="@{viewModel.restaurantDetails.phone}"
+            android:textAlignment="viewStart"
+            android:textColor="?android:textColorPrimary"
+            app:drawableStartCompat="@drawable/ic_phone"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/restaurantDesc"
+            app:visibleUnless="@{viewModel.restaurantDetails.phone == null}"
+            tools:text="+201066770250" />
+
+        <TextView
+            android:id="@+id/city"
+            style="@style/TextAppearance.H3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:drawablePadding="@dimen/spacing_micro"
+            android:text='@{String.format("%s %s", viewModel.restaurantDetails.country != null ?viewModel.restaurantDetails.country: "", viewModel.restaurantDetails.city != null ? viewModel.restaurantDetails.city:"")}'
+            android:textAlignment="viewStart"
+            android:textColor="?android:textColorPrimary"
+            app:drawableStartCompat="@drawable/ic_city"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/phone"
+            app:visibleUnless="@{viewModel.restaurantDetails.country == null &amp;&amp; viewModel.restaurantDetails.city == null}"
+            tools:text="Egypt cairo" />
+
+        <TextView
+            android:id="@+id/address"
+            style="@style/TextAppearance.H3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:drawablePadding="@dimen/spacing_micro"
+            android:text="@{viewModel.restaurantDetails.address}"
+            android:textAlignment="viewStart"
+            android:textColor="?android:textColorPrimary"
+            app:drawableStartCompat="@drawable/ic_address"
+            app:layout_constraintEnd_toEndOf="@id/guideline_end"
+            app:layout_constraintStart_toStartOf="@id/guideline_start"
+            app:layout_constraintTop_toBottomOf="@+id/city"
+            app:visibleUnless="@{viewModel.restaurantDetails.address == null}"
+            tools:text="22 cairo city street" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/white"
+            android:elevation="@dimen/margin_small"
+            android:visibility="gone"
+            app:goneUnless="@{viewModel.isLoading}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <ProgressBar
+                android:id="@+id/loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                android:indeterminateTint="@color/color_primary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -37,14 +37,6 @@ val crashlytics = "17.2.2"
 val dataStore = "1.0.0-beta01"
 val drawerLayout = "1.1.0-rc01"
 val espresso = "3.1.1"
-val firebaseAnalytics = "17.4.0"
-val firebaseAuth = "19.3.1"
-val firebaseConfig = "19.1.4"
-val firebaseFirestore = "21.4.3"
-val firebaseFunctions = "19.0.2"
-val firebaseMessaging = "20.1.6"
-val firebaseUi = "4.0.0"
-val flexbox = "1.1.0"
 val fragment = "1.3.0"
 val glide = "4.9.0"
 val googlePlayServicesMapsKtx = "3.0.0"
@@ -57,7 +49,7 @@ val junitExt = "1.1.1"
 val lifecycle = "2.4.0-alpha01"
 val lottie = "3.0.0"
 val material = "1.4.0-beta01"
-val mockito = "3.3.1"
+val mockito = "3.11.2"
 val mockitoKotlin = "1.5.0"
 val okhttp = "3.10.0"
 val okio = "1.14.0"
@@ -72,6 +64,15 @@ val timber = "4.7.1"
 val viewpager2 = "1.0.0"
 val viewModelCompose = "1.0.0-alpha02"
 val uiAutomator = "2.2.0"
+val retrofit = "2.9.0"
+val moshi = "1.11.0"
+val kotchi = "2.3.3"
+val faker = "1.0.2"
+val binder = "1.0.0-alpha01"
+val turbine = "0.5.2"
+val assertJVersion = "3.19.0"
+val playServiceLocation = "18.0.0"
+val mockkVersion = "1.10.6"
 
 dependencies {
     constraints {
@@ -84,9 +85,10 @@ dependencies {
         api("${Libs.CORE_KTX}:$core")
         api("${Libs.COROUTINES}:$coroutines")
         api("${Libs.COROUTINES_TEST}:$coroutines")
+        api("${Libs.COROUTINES_PLAY_SERVICE}:$coroutines")
         api("${Libs.DRAWER_LAYOUT}:$drawerLayout")
-        api("${Libs.ESPRESSO_CORE}:$espresso")
-        api("${Libs.ESPRESSO_CONTRIB}:$espresso")
+        api(Libs.ESPRESSO_CORE)
+        api(Libs.ESPRESSO_CONTRIB)
         api("${Libs.FRAGMENT_KTX}:$fragment")
         api("${Libs.FRAGMENT_TEST}:$fragment")
         api("${Libs.GLIDE}:$glide")
@@ -98,20 +100,38 @@ dependencies {
         api("${Libs.HAMCREST}:$hamcrest")
         api("${Libs.HILT_ANDROID}:$hilt")
         api("${Libs.HILT_COMPILER}:$hilt")
-        api("${Libs.HILT_TESTING}:$hilt")
+        api(Libs.HILT_TESTING)
         api("${Libs.JUNIT}:$junit")
-        api("${Libs.EXT_JUNIT}:$junitExt")
+        api(Libs.EXT_JUNIT)
         api("${Libs.KOTLIN_STDLIB}:${Versions.KOTLIN}")
         api("${Libs.MATERIAL}:$material")
         api("${Libs.MOCKITO_CORE}:$mockito")
         api("${Libs.MOCKITO_KOTLIN}:$mockitoKotlin")
         api("${Libs.NAVIGATION_FRAGMENT_KTX}:${Versions.NAVIGATION}")
         api("${Libs.NAVIGATION_UI_KTX}:${Versions.NAVIGATION}")
+        api(Libs.NAVIGATION_TESTING)
         api("${Libs.OKHTTP}:$okhttp")
         api("${Libs.OKHTTP_LOGGING_INTERCEPTOR}:$okhttp")
-        api("${Libs.RULES}:$rules")
-        api("${Libs.RUNNER}:$runner")
+        api(Libs.RULES)
+        api(Libs.RUNNER)
         api("${Libs.TIMBER}:$timber")
+        api("${Libs.OKHTTP_MOCK_SERVER}:$okhttp")
+        api("${Libs.RETROFIT}:$retrofit")
+        api("${Libs.MOSHI}:$moshi")
+        api("${Libs.MOSHI_RETROFIT}:$retrofit")
+        api("${Libs.MOSHI_KOTLIN}:$moshi")
+        api("${Libs.KOTCHI}:$kotchi")
+        api("${Libs.KOTCHI_COMPILER}:$kotchi")
+        api("${Libs.FAKER}:$faker")
+        api("${Libs.HILT_BINDER}:$binder")
+        api("${Libs.HILT_BINDER_COMPILER}:$binder")
+        api("${Libs.TURBINE}:$turbine")
+        api("${Libs.ASSERT_J}:$assertJVersion")
+        api("${Libs.LIFECYCLE_COMPILER}:$lifecycle")
+        api("${Libs.LIFECYCLE_RUNTIME_KTX}:$lifecycle")
+        api("${Libs.LIFECYCLE_VIEW_MODEL_KTX}:$lifecycle")
+        api("${Libs.PLAY_SERVICE_LOCATION}:$playServiceLocation")
+        api("${Libs.MOCKK}:$mockkVersion")
     }
 }
 

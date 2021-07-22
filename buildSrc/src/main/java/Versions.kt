@@ -12,4 +12,5 @@ object Versions {
     const val NAVIGATION = "2.3.5"
     const val HILT_AGP = "2.36"
     const val GOOGLE_SERVICES = "4.3.3"
+    const val SECRETS_SERVICES = "1.3.0"
 }
