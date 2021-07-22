@@ -164,7 +164,9 @@ class MapFragment : Fragment() {
                 }
 
                 setOnInfoWindowClickListener { marker ->
-                    navigateToDetails((marker?.tag as VenuesItem).id)
+                    val item = marker?.tag as VenuesItem
+                    viewModel.saveCurrentSelectedMarkerLocation(item.location)
+                    navigateToDetails(item.id)
                 }
             }
         }
